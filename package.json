@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/htbkoo/PouchDbSpike/issues"
   },
-  "homepage": "https://github.com/htbkoo/PouchDbSpike#readme"
+  "homepage": "https://github.com/htbkoo/PouchDbSpike#readme",
+  "dependencies": {
+    "pouchdb": "^7.0.0"
+  }
 }
