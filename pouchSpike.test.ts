@@ -1,4 +1,4 @@
-import * as PouchDB from "pouchdb";
+import PouchDB from "pouchdb";
 import {addItem} from "./pouchSpike";
 
 const db = new PouchDB('data/my_database');
