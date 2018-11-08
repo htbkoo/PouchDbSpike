@@ -169,3 +169,9 @@ fabric.properties
 
 # Serverless directories
 .serverless
+
+#----- Self - start
+build/
+/my_database/
+/data/
+#----- Self - end
