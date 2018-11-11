@@ -41,6 +41,15 @@ describe('pouchDB', function () {
             });
     });
 
+    it("test allDocs", function () {
+        return addItem(db, "more")
+            .then(() => db.allDocs({include_docs: true}))
+            .then(allDocs => {
+                console.log(allDocs);
+                expect(allDocs.total_rows).toEqual(1);
+            })
+    });
+
     it("test allDocs after remove", function () {
         return addItem(db, "more")
             .then(result => db.remove({
