@@ -40,4 +40,21 @@ describe('pouchDB', function () {
                 expect(err.reason).toEqual("deleted");
             });
     });
+
+    it("test allDocs after remove", function () {
+        return addItem(db, "more")
+            .then(result => db.remove({
+                _id: result.id,
+                _rev: result.rev
+            }))
+            .then(() => db.allDocs({include_docs: true}))
+            .then(allDocs => {
+                console.log(allDocs);
+                expect(allDocs.total_rows).toEqual(0);
+            })
+            .catch(err => {
+                expect(err.name).toEqual("not_found");
+                expect(err.reason).toEqual("deleted");
+            });
+    });
 });
