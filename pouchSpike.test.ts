@@ -27,6 +27,17 @@ describe('pouchDB', function () {
                 expect(result.ok).toEqual(true);
                 return db.get(result.id);
             })
-            .then(doc=>expect(doc.title).toEqual("another"));
+            .then(doc => expect(doc.title).toEqual("another"));
+    });
+
+    it('cannot get doc after remove (with deleted reason)', function () {
+        return addItem(db, "more")
+            .then(result => db.get(result.id))
+            .then(doc => db.remove(doc))
+            .then(result => db.get(result.id))
+            .catch(err => {
+                expect(err.name).toEqual("not_found");
+                expect(err.reason).toEqual("deleted");
+            });
     });
 });
