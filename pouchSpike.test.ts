@@ -7,6 +7,16 @@ PouchDB.plugin(pouchdb_adapter_memory);
 const db = new PouchDB('in_memory_database', {adapter: 'memory'});
 
 describe('pouchDB', function () {
+    beforeEach(function () {
+        return db.allDocs({include_docs: true})
+            .then(allDocs => allDocs.rows.map(toDeletedRows))
+            .then(deleteDocs => db.bulkDocs(deleteDocs));
+
+        function toDeletedRows(row) {
+            return {_id: row.id, _rev: row.doc._rev, _deleted: true};
+        }
+    });
+
     it('should add to local database', function () {
         return addItem(db, "")
             .then(data => expect(data).toBeDefined());
